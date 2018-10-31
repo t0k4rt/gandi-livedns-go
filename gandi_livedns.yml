@@ -1,0 +1,810 @@
+swagger: "2.0"
+info:
+  title: "Gandi LiveDNS Api"
+  version: "1.0.0"
+host: dns.api.gandi.net
+basePath: /api/v5
+schemes:
+  - https
+
+securityDefinitions:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-Api-Key
+
+tags:
+  - name: DNS zones
+    description: Manage Gandi dns zones
+  - name: Snapshots
+    description: Manage Gandi dns zones snapshots
+  - name: Records
+    description: Manage Gandi zone records
+  - name: Domains
+    description: Manage Gandi Domains
+
+
+paths:
+
+  /zones:
+    get:
+      tags:
+        - DNS zones
+      summary: Returns a list of gandi dns zones
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Zone'
+
+    post:
+      tags:
+        - DNS zones
+      summary: Creates a gandi dns zone
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: zoneName
+          description: Zone name
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+  /zones/{uuid}:
+    get:
+      tags:
+        - DNS zones
+      summary: Show details about gandi dns zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Zone'
+
+    patch:
+      tags:
+        - DNS zones
+      summary: Modifies name of gandi dns zone
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: body
+          name: zoneName
+          description: Zone name
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Zone'
+
+    delete:
+      tags:
+        - DNS zones
+      summary: Deletes a gandi dns zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Zone'
+
+  /zones/{uuid}/domains:
+    get:
+      tags:
+        - DNS zones
+        - Domains
+      summary: Returns domains for a given DNS zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                fqdn:
+                  type: string
+
+
+  /zones/{uuid}/domains/{domain}:
+    post:
+      tags:
+        - DNS zones
+        - Domains
+      summary: Attach a domain to a zone UUID
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to move
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+  /zones/{uuid}/records:
+    get:
+      tags:
+        - Records
+      summary: Returns records in DNS zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+    post:
+      tags:
+        - Records
+      summary: Adds a record to the zone
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: body
+          name: record
+          description: Zone name
+          schema:
+            $ref: '#/definitions/Record'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+    put:
+      tags:
+        - Records
+      summary: Modify all records in zone
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: body
+          name: record
+          description: Zone name
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+    delete:
+      tags:
+        - Records
+      summary: Delete all records in zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+
+  /zones/{uuid}/records/{name}:
+    get:
+      tags:
+        - Records
+      summary: get all records in zone with name
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: Record name
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+    delete:
+      tags:
+        - Records
+      summary: delete all records in zone matching name
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: Record name
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+
+  /zones/{uuid}/records/{name}/{type}:
+    get:
+      tags:
+        - Records
+      summary: get all records in zone with name and type
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: Record name
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Record type
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+    delete:
+      tags:
+        - Records
+      summary: delete all records in zone matching name and type
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: Record name
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Record type
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+
+  /zones/{uuid}/snapshots:
+    post:
+      tags:
+        - DNS zones
+        - Snapshots
+      summary: Create a snapshot of a DNS zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '201':
+          description: OK
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              uuid:
+                type: string
+
+    get:
+      tags:
+        - DNS zones
+        - Snapshots
+      summary: List snapshots for a given zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                date_created:
+                  type: string
+                uuid:
+                  type: string
+
+  /zones/{uuid}/snapshots/{snapshot_uuid}:
+    get:
+      tags:
+        - DNS zones
+        - Snapshots
+      summary: Create a snapshot of a zone
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: uuid
+          type: string
+          required: true
+          description: Zone uuid
+        - in: path
+          name: snapshot_uuid
+          type: string
+          required: true
+          description: Snapshot uuid
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              date_created:
+                type: string
+              uuid:
+                type: string
+              zone_uuid:
+                type: string
+              zone_data:
+                type: array
+                items:
+                  $ref: '#/definitions/Record'
+
+  /domains:
+    post:
+      tags:
+        - Domains
+      summary: Create a domain
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: domain
+          description: domain to create
+          schema:
+            type: object
+            required:
+              - fqdn
+              - zone_uuid
+            properties:
+              fqdn:
+                type: string
+              zone_uuid:
+                type: string
+      responses:
+        '201':
+          description: OK
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+              uuid:
+                type: string
+
+    get:
+      tags:
+        - Domains
+      summary: List domains
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                fqdn:
+                  type: string
+
+  /domains/{domain}:
+    get:
+      tags:
+        - Domains
+      summary: Show domain details
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domaine to inspect
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                zonedata:
+                  type: string
+                fqdn:
+                  type: string
+                zone:
+                  type: string
+
+    patch:
+      tags:
+        - Domains
+      summary: Update domain zone uuid
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: body
+          name: zone_uuid
+          description: zone uuid to change
+          schema:
+            type: object
+            required:
+              - zone_uuid
+            properties:
+              zone_uuid:
+                type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReturnMessage'
+
+
+
+  /domains/{domain}/records:
+    get:
+      tags:
+        - Domains
+        - Records
+      summary: List records for domain
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+
+    post:
+      tags:
+        - Domains
+        - Records
+      summary: Adds a record for a domain
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: body
+          name: record
+          required: true
+          description: Record to add
+          schema:
+            $ref: '#/definitions/Record'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+
+    put:
+      tags:
+        - Domains
+        - Records
+      summary: Change all records for a domain
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: body
+          name: record
+          required: true
+          description: Record to add
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  $ref: '#/definitions/Record'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReturnMessage'
+
+
+  /domains/{domain}/records/{name}:
+    get:
+      tags:
+        - Domains
+        - Records
+      summary: List records for domain matching name
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: record name to inspect
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+
+
+  /domains/{domain}/records/{name}/{type}:
+    get:
+      tags:
+        - Domains
+        - Records
+      summary: List records for domain matching name and type
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: path
+          name: name
+          type: string
+          required: true
+          description: record name to inspect
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: record type to inspect
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Record'
+
+
+definitions:
+  Zone:
+    type: object
+    properties:
+      retry:
+        type: integer
+        format: int32
+      uuid:
+        type: string
+      minimum:
+        type: integer
+        format: int32
+      refresh:
+        type: integer
+        format: int32
+      expire:
+        type: integer
+        format: int32
+      serial:
+        type: integer
+        format: int32
+      user_uuid:
+        type: string
+      email:
+        type: string
+      primary_ns:
+        type: string
+      name:
+        type: string
+
+  Record:
+    type: object
+    properties:
+      name:
+        type: string
+      rrset_type:
+        type: string
+        enum: [A, AAAA, CAA, CDS, CNAME, DNAME, DS, LOC, MX, NS, PTR, SPF, SRV, SSHFP, TLSA, TXT, WKS]
+      rrset_ttl:
+        type: integer
+        format: int32
+      rrset_values:
+        type: array
+        items:
+          type: string
+
+  ReturnMessage:
+    type: object
+    properties:
+      message:
+        type: string
+
+
+
