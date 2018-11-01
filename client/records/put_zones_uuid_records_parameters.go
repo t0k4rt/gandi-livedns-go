@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	strfmt "github.com/go-openapi/strfmt"
-	models "github.com/tokart/gandi-livedns-go/models"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 	"golang.org/x/net/context"
 )
 

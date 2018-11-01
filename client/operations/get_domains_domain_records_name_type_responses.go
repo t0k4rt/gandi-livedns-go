@@ -11,7 +11,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 	strfmt "github.com/go-openapi/strfmt"
-	models "github.com/tokart/gandi-livedns-go/models"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 )
 
 // GetDomainsDomainRecordsNameTypeReader is a Reader for the GetDomainsDomainRecordsNameType structure.

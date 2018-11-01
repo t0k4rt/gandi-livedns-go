@@ -14,7 +14,7 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
-	models "github.com/tokart/gandi-livedns-go/models"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 )
 
 // PostZonesReader is a Reader for the PostZones structure.

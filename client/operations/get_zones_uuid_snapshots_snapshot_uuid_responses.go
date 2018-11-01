@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime"
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-	models "github.com/tokart/gandi-livedns-go/models"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 )
 
 // GetZonesUUIDSnapshotsSnapshotUUIDReader is a Reader for the GetZonesUUIDSnapshotsSnapshotUUID structure.
