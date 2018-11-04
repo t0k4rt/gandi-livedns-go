@@ -55,25 +55,25 @@ func (a *Client) DeleteZonesUUIDRecords(params *DeleteZonesUUIDRecordsParams, au
 }
 
 /*
-DeleteZonesUUIDRecordsName deletes all records in zone matching name
+DeleteZonesUUIDRecordsRecordName deletes all records in zone matching name
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUIDRecordsName(params *DeleteZonesUUIDRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsNameOK, error) {
+func (a *Client) DeleteZonesUUIDRecordsRecordName(params *DeleteZonesUUIDRecordsRecordNameParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsRecordNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteZonesUUIDRecordsNameParams()
+		params = NewDeleteZonesUUIDRecordsRecordNameParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteZonesUUIDRecordsName",
+		ID:                 "DeleteZonesUUIDRecordsRecordName",
 		Method:             "DELETE",
-		PathPattern:        "/zones/{uuid}/records/{name}",
+		PathPattern:        "/zones/{uuid}/records/{record_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteZonesUUIDRecordsNameReader{formats: a.formats},
+		Reader:             &DeleteZonesUUIDRecordsRecordNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -81,30 +81,30 @@ func (a *Client) DeleteZonesUUIDRecordsName(params *DeleteZonesUUIDRecordsNamePa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteZonesUUIDRecordsNameOK), nil
+	return result.(*DeleteZonesUUIDRecordsRecordNameOK), nil
 
 }
 
 /*
-DeleteZonesUUIDRecordsNameType deletes all records in zone matching name and type
+DeleteZonesUUIDRecordsRecordNameRecordType deletes all records in zone matching name and type
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUIDRecordsNameType(params *DeleteZonesUUIDRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsNameTypeOK, error) {
+func (a *Client) DeleteZonesUUIDRecordsRecordNameRecordType(params *DeleteZonesUUIDRecordsRecordNameRecordTypeParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsRecordNameRecordTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewDeleteZonesUUIDRecordsNameTypeParams()
+		params = NewDeleteZonesUUIDRecordsRecordNameRecordTypeParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "DeleteZonesUUIDRecordsNameType",
+		ID:                 "DeleteZonesUUIDRecordsRecordNameRecordType",
 		Method:             "DELETE",
-		PathPattern:        "/zones/{uuid}/records/{name}/{type}",
+		PathPattern:        "/zones/{uuid}/records/{record_name}/{record_type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &DeleteZonesUUIDRecordsNameTypeReader{formats: a.formats},
+		Reader:             &DeleteZonesUUIDRecordsRecordNameRecordTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -112,7 +112,7 @@ func (a *Client) DeleteZonesUUIDRecordsNameType(params *DeleteZonesUUIDRecordsNa
 	if err != nil {
 		return nil, err
 	}
-	return result.(*DeleteZonesUUIDRecordsNameTypeOK), nil
+	return result.(*DeleteZonesUUIDRecordsRecordNameRecordTypeOK), nil
 
 }
 
@@ -148,25 +148,25 @@ func (a *Client) GetZonesUUIDRecords(params *GetZonesUUIDRecordsParams, authInfo
 }
 
 /*
-GetZonesUUIDRecordsName gets all records in zone with name
+GetZonesUUIDRecordsRecordName gets all records in zone with name
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDRecordsName(params *GetZonesUUIDRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsNameOK, error) {
+func (a *Client) GetZonesUUIDRecordsRecordName(params *GetZonesUUIDRecordsRecordNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsRecordNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetZonesUUIDRecordsNameParams()
+		params = NewGetZonesUUIDRecordsRecordNameParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetZonesUUIDRecordsName",
+		ID:                 "GetZonesUUIDRecordsRecordName",
 		Method:             "GET",
-		PathPattern:        "/zones/{uuid}/records/{name}",
+		PathPattern:        "/zones/{uuid}/records/{record_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetZonesUUIDRecordsNameReader{formats: a.formats},
+		Reader:             &GetZonesUUIDRecordsRecordNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -174,30 +174,30 @@ func (a *Client) GetZonesUUIDRecordsName(params *GetZonesUUIDRecordsNameParams, 
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetZonesUUIDRecordsNameOK), nil
+	return result.(*GetZonesUUIDRecordsRecordNameOK), nil
 
 }
 
 /*
-GetZonesUUIDRecordsNameType gets all records in zone with name and type
+GetZonesUUIDRecordsRecordNameRecordType gets all records in zone with name and type
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDRecordsNameType(params *GetZonesUUIDRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsNameTypeOK, error) {
+func (a *Client) GetZonesUUIDRecordsRecordNameRecordType(params *GetZonesUUIDRecordsRecordNameRecordTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsRecordNameRecordTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetZonesUUIDRecordsNameTypeParams()
+		params = NewGetZonesUUIDRecordsRecordNameRecordTypeParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetZonesUUIDRecordsNameType",
+		ID:                 "GetZonesUUIDRecordsRecordNameRecordType",
 		Method:             "GET",
-		PathPattern:        "/zones/{uuid}/records/{name}/{type}",
+		PathPattern:        "/zones/{uuid}/records/{record_name}/{record_type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetZonesUUIDRecordsNameTypeReader{formats: a.formats},
+		Reader:             &GetZonesUUIDRecordsRecordNameRecordTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -205,7 +205,7 @@ func (a *Client) GetZonesUUIDRecordsNameType(params *GetZonesUUIDRecordsNameType
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetZonesUUIDRecordsNameTypeOK), nil
+	return result.(*GetZonesUUIDRecordsRecordNameRecordTypeOK), nil
 
 }
 

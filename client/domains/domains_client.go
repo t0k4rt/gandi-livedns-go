@@ -117,25 +117,25 @@ func (a *Client) GetDomainsDomainRecords(params *GetDomainsDomainRecordsParams, 
 }
 
 /*
-GetDomainsDomainRecordsName lists records for domain matching name
+GetDomainsDomainRecordsRecordName lists records for domain matching name
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsNameOK, error) {
+func (a *Client) GetDomainsDomainRecordsRecordName(params *GetDomainsDomainRecordsRecordNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsRecordNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetDomainsDomainRecordsNameParams()
+		params = NewGetDomainsDomainRecordsRecordNameParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetDomainsDomainRecordsName",
+		ID:                 "GetDomainsDomainRecordsRecordName",
 		Method:             "GET",
-		PathPattern:        "/domains/{domain}/records/{name}",
+		PathPattern:        "/domains/{domain}/records/{record_name}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetDomainsDomainRecordsNameReader{formats: a.formats},
+		Reader:             &GetDomainsDomainRecordsRecordNameReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -143,30 +143,30 @@ func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsName
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetDomainsDomainRecordsNameOK), nil
+	return result.(*GetDomainsDomainRecordsRecordNameOK), nil
 
 }
 
 /*
-GetDomainsDomainRecordsNameType lists records for domain matching name and type
+GetDomainsDomainRecordsRecordNameRecordType lists records for domain matching name and type
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsNameTypeOK, error) {
+func (a *Client) GetDomainsDomainRecordsRecordNameRecordType(params *GetDomainsDomainRecordsRecordNameRecordTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsRecordNameRecordTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
-		params = NewGetDomainsDomainRecordsNameTypeParams()
+		params = NewGetDomainsDomainRecordsRecordNameRecordTypeParams()
 	}
 
 	result, err := a.transport.Submit(&runtime.ClientOperation{
-		ID:                 "GetDomainsDomainRecordsNameType",
+		ID:                 "GetDomainsDomainRecordsRecordNameRecordType",
 		Method:             "GET",
-		PathPattern:        "/domains/{domain}/records/{name}/{type}",
+		PathPattern:        "/domains/{domain}/records/{record_name}/{record_type}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{""},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetDomainsDomainRecordsNameTypeReader{formats: a.formats},
+		Reader:             &GetDomainsDomainRecordsRecordNameRecordTypeReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -174,7 +174,7 @@ func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecords
 	if err != nil {
 		return nil, err
 	}
-	return result.(*GetDomainsDomainRecordsNameTypeOK), nil
+	return result.(*GetDomainsDomainRecordsRecordNameRecordTypeOK), nil
 
 }
 

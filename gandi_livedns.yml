@@ -286,7 +286,7 @@ paths:
             $ref: '#/definitions/ReturnMessage'
 
 
-  /zones/{uuid}/records/{name}:
+  /zones/{uuid}/records/{record_name}:
     get:
       tags:
         - Records
@@ -301,7 +301,7 @@ paths:
           required: true
           description: Zone uuid
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: Record name
@@ -326,7 +326,7 @@ paths:
           required: true
           description: Zone uuid
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: Record name
@@ -337,7 +337,7 @@ paths:
             $ref: '#/definitions/ReturnMessage'
 
 
-  /zones/{uuid}/records/{name}/{type}:
+  /zones/{uuid}/records/{record_name}/{record_type}:
     get:
       tags:
         - Records
@@ -352,12 +352,12 @@ paths:
           required: true
           description: Zone uuid
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: Record name
         - in: path
-          name: type
+          name: record_type
           type: string
           required: true
           description: Record type
@@ -382,12 +382,12 @@ paths:
           required: true
           description: Zone uuid
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: Record name
         - in: path
-          name: type
+          name: record_type
           type: string
           required: true
           description: Record type
@@ -685,7 +685,7 @@ paths:
             $ref: '#/definitions/ReturnMessage'
 
 
-  /domains/{domain}/records/{name}:
+  /domains/{domain}/records/{record_name}:
     get:
       tags:
         - Domains
@@ -700,7 +700,7 @@ paths:
           required: true
           description: Domain to inspect
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: record name to inspect
@@ -713,7 +713,7 @@ paths:
               $ref: '#/definitions/Record'
 
 
-  /domains/{domain}/records/{name}/{type}:
+  /domains/{domain}/records/{record_name}/{record_type}:
     get:
       tags:
         - Domains
@@ -728,12 +728,12 @@ paths:
           required: true
           description: Domain to inspect
         - in: path
-          name: name
+          name: record_name
           type: string
           required: true
           description: record name to inspect
         - in: path
-          name: type
+          name: record_type
           type: string
           required: true
           description: record type to inspect
