@@ -14,6 +14,7 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 )
 
 // PostDomainsReader is a Reader for the PostDomains structure.
@@ -32,8 +33,22 @@ func (o *PostDomainsReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return result, nil
 
+	case 400:
+		result := NewPostDomainsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPostDomainsDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -57,6 +72,73 @@ func (o *PostDomainsCreated) Error() string {
 func (o *PostDomainsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(PostDomainsCreatedBody)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostDomainsBadRequest creates a PostDomainsBadRequest with default headers values
+func NewPostDomainsBadRequest() *PostDomainsBadRequest {
+	return &PostDomainsBadRequest{}
+}
+
+/*PostDomainsBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PostDomainsBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PostDomainsBadRequest) Error() string {
+	return fmt.Sprintf("[POST /domains][%d] postDomainsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostDomainsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostDomainsDefault creates a PostDomainsDefault with default headers values
+func NewPostDomainsDefault(code int) *PostDomainsDefault {
+	return &PostDomainsDefault{
+		_statusCode: code,
+	}
+}
+
+/*PostDomainsDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PostDomainsDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the post domains default response
+func (o *PostDomainsDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PostDomainsDefault) Error() string {
+	return fmt.Sprintf("[POST /domains][%d] PostDomains default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PostDomainsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

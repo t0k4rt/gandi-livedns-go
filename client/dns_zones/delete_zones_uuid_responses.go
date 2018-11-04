@@ -30,8 +30,22 @@ func (o *DeleteZonesUUIDReader) ReadResponse(response runtime.ClientResponse, co
 		}
 		return result, nil
 
+	case 400:
+		result := NewDeleteZonesUUIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewDeleteZonesUUIDDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -55,6 +69,73 @@ func (o *DeleteZonesUUIDOK) Error() string {
 func (o *DeleteZonesUUIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.Zone)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteZonesUUIDBadRequest creates a DeleteZonesUUIDBadRequest with default headers values
+func NewDeleteZonesUUIDBadRequest() *DeleteZonesUUIDBadRequest {
+	return &DeleteZonesUUIDBadRequest{}
+}
+
+/*DeleteZonesUUIDBadRequest handles this case with default header values.
+
+Not OK
+*/
+type DeleteZonesUUIDBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *DeleteZonesUUIDBadRequest) Error() string {
+	return fmt.Sprintf("[DELETE /zones/{uuid}][%d] deleteZonesUuidBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *DeleteZonesUUIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDeleteZonesUUIDDefault creates a DeleteZonesUUIDDefault with default headers values
+func NewDeleteZonesUUIDDefault(code int) *DeleteZonesUUIDDefault {
+	return &DeleteZonesUUIDDefault{
+		_statusCode: code,
+	}
+}
+
+/*DeleteZonesUUIDDefault handles this case with default header values.
+
+Unexpected error
+*/
+type DeleteZonesUUIDDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the delete zones UUID default response
+func (o *DeleteZonesUUIDDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *DeleteZonesUUIDDefault) Error() string {
+	return fmt.Sprintf("[DELETE /zones/{uuid}][%d] DeleteZonesUUID default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *DeleteZonesUUIDDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

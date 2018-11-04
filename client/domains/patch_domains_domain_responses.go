@@ -33,8 +33,22 @@ func (o *PatchDomainsDomainReader) ReadResponse(response runtime.ClientResponse,
 		}
 		return result, nil
 
+	case 400:
+		result := NewPatchDomainsDomainBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPatchDomainsDomainDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -48,7 +62,7 @@ func NewPatchDomainsDomainOK() *PatchDomainsDomainOK {
 OK
 */
 type PatchDomainsDomainOK struct {
-	Payload []*models.ReturnMessage
+	Payload []*models.Return200
 }
 
 func (o *PatchDomainsDomainOK) Error() string {
@@ -59,6 +73,73 @@ func (o *PatchDomainsDomainOK) readResponse(response runtime.ClientResponse, con
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchDomainsDomainBadRequest creates a PatchDomainsDomainBadRequest with default headers values
+func NewPatchDomainsDomainBadRequest() *PatchDomainsDomainBadRequest {
+	return &PatchDomainsDomainBadRequest{}
+}
+
+/*PatchDomainsDomainBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PatchDomainsDomainBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PatchDomainsDomainBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /domains/{domain}][%d] patchDomainsDomainBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchDomainsDomainBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchDomainsDomainDefault creates a PatchDomainsDomainDefault with default headers values
+func NewPatchDomainsDomainDefault(code int) *PatchDomainsDomainDefault {
+	return &PatchDomainsDomainDefault{
+		_statusCode: code,
+	}
+}
+
+/*PatchDomainsDomainDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PatchDomainsDomainDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the patch domains domain default response
+func (o *PatchDomainsDomainDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PatchDomainsDomainDefault) Error() string {
+	return fmt.Sprintf("[PATCH /domains/{domain}][%d] PatchDomainsDomain default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PatchDomainsDomainDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

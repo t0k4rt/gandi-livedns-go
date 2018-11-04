@@ -302,6 +302,37 @@ func (a *Client) PutDomainsDomainRecords(params *PutDomainsDomainRecordsParams, 
 
 }
 
+/*
+PutDomainsDomainRecordsRecordName changes all records for a domain
+
+Optional extended description in Markdown.
+*/
+func (a *Client) PutDomainsDomainRecordsRecordName(params *PutDomainsDomainRecordsRecordNameParams, authInfo runtime.ClientAuthInfoWriter) (*PutDomainsDomainRecordsRecordNameCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPutDomainsDomainRecordsRecordNameParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PutDomainsDomainRecordsRecordName",
+		Method:             "PUT",
+		PathPattern:        "/domains/{domain}/records/{record_name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PutDomainsDomainRecordsRecordNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PutDomainsDomainRecordsRecordNameCreated), nil
+
+}
+
 // SetTransport changes the transport on the client
 func (a *Client) SetTransport(transport runtime.ClientTransport) {
 	a.transport = transport

@@ -33,8 +33,22 @@ func (o *PutDomainsDomainRecordsReader) ReadResponse(response runtime.ClientResp
 		}
 		return result, nil
 
+	case 400:
+		result := NewPutDomainsDomainRecordsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPutDomainsDomainRecordsDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -48,7 +62,7 @@ func NewPutDomainsDomainRecordsCreated() *PutDomainsDomainRecordsCreated {
 OK
 */
 type PutDomainsDomainRecordsCreated struct {
-	Payload *models.ReturnMessage
+	Payload *models.Return200
 }
 
 func (o *PutDomainsDomainRecordsCreated) Error() string {
@@ -57,7 +71,74 @@ func (o *PutDomainsDomainRecordsCreated) Error() string {
 
 func (o *PutDomainsDomainRecordsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ReturnMessage)
+	o.Payload = new(models.Return200)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPutDomainsDomainRecordsBadRequest creates a PutDomainsDomainRecordsBadRequest with default headers values
+func NewPutDomainsDomainRecordsBadRequest() *PutDomainsDomainRecordsBadRequest {
+	return &PutDomainsDomainRecordsBadRequest{}
+}
+
+/*PutDomainsDomainRecordsBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PutDomainsDomainRecordsBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PutDomainsDomainRecordsBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /domains/{domain}/records][%d] putDomainsDomainRecordsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PutDomainsDomainRecordsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPutDomainsDomainRecordsDefault creates a PutDomainsDomainRecordsDefault with default headers values
+func NewPutDomainsDomainRecordsDefault(code int) *PutDomainsDomainRecordsDefault {
+	return &PutDomainsDomainRecordsDefault{
+		_statusCode: code,
+	}
+}
+
+/*PutDomainsDomainRecordsDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PutDomainsDomainRecordsDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the put domains domain records default response
+func (o *PutDomainsDomainRecordsDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PutDomainsDomainRecordsDefault) Error() string {
+	return fmt.Sprintf("[PUT /domains/{domain}/records][%d] PutDomainsDomainRecords default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PutDomainsDomainRecordsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

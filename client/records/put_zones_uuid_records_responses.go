@@ -30,8 +30,22 @@ func (o *PutZonesUUIDRecordsReader) ReadResponse(response runtime.ClientResponse
 		}
 		return result, nil
 
+	case 400:
+		result := NewPutZonesUUIDRecordsBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPutZonesUUIDRecordsDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +59,7 @@ func NewPutZonesUUIDRecordsCreated() *PutZonesUUIDRecordsCreated {
 OK
 */
 type PutZonesUUIDRecordsCreated struct {
-	Payload *models.ReturnMessage
+	Payload *models.Return200
 }
 
 func (o *PutZonesUUIDRecordsCreated) Error() string {
@@ -54,7 +68,74 @@ func (o *PutZonesUUIDRecordsCreated) Error() string {
 
 func (o *PutZonesUUIDRecordsCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ReturnMessage)
+	o.Payload = new(models.Return200)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPutZonesUUIDRecordsBadRequest creates a PutZonesUUIDRecordsBadRequest with default headers values
+func NewPutZonesUUIDRecordsBadRequest() *PutZonesUUIDRecordsBadRequest {
+	return &PutZonesUUIDRecordsBadRequest{}
+}
+
+/*PutZonesUUIDRecordsBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PutZonesUUIDRecordsBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PutZonesUUIDRecordsBadRequest) Error() string {
+	return fmt.Sprintf("[PUT /zones/{uuid}/records][%d] putZonesUuidRecordsBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PutZonesUUIDRecordsBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPutZonesUUIDRecordsDefault creates a PutZonesUUIDRecordsDefault with default headers values
+func NewPutZonesUUIDRecordsDefault(code int) *PutZonesUUIDRecordsDefault {
+	return &PutZonesUUIDRecordsDefault{
+		_statusCode: code,
+	}
+}
+
+/*PutZonesUUIDRecordsDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PutZonesUUIDRecordsDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the put zones UUID records default response
+func (o *PutZonesUUIDRecordsDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PutZonesUUIDRecordsDefault) Error() string {
+	return fmt.Sprintf("[PUT /zones/{uuid}/records][%d] PutZonesUUIDRecords default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PutZonesUUIDRecordsDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

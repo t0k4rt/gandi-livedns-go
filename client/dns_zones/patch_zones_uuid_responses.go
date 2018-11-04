@@ -33,8 +33,22 @@ func (o *PatchZonesUUIDReader) ReadResponse(response runtime.ClientResponse, con
 		}
 		return result, nil
 
+	case 400:
+		result := NewPatchZonesUUIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPatchZonesUUIDDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -58,6 +72,73 @@ func (o *PatchZonesUUIDOK) Error() string {
 func (o *PatchZonesUUIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.Zone)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchZonesUUIDBadRequest creates a PatchZonesUUIDBadRequest with default headers values
+func NewPatchZonesUUIDBadRequest() *PatchZonesUUIDBadRequest {
+	return &PatchZonesUUIDBadRequest{}
+}
+
+/*PatchZonesUUIDBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PatchZonesUUIDBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PatchZonesUUIDBadRequest) Error() string {
+	return fmt.Sprintf("[PATCH /zones/{uuid}][%d] patchZonesUuidBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PatchZonesUUIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPatchZonesUUIDDefault creates a PatchZonesUUIDDefault with default headers values
+func NewPatchZonesUUIDDefault(code int) *PatchZonesUUIDDefault {
+	return &PatchZonesUUIDDefault{
+		_statusCode: code,
+	}
+}
+
+/*PatchZonesUUIDDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PatchZonesUUIDDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the patch zones UUID default response
+func (o *PatchZonesUUIDDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PatchZonesUUIDDefault) Error() string {
+	return fmt.Sprintf("[PATCH /zones/{uuid}][%d] PatchZonesUUID default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PatchZonesUUIDDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

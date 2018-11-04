@@ -30,8 +30,22 @@ func (o *GetDomainsDomainRecordsRecordNameReader) ReadResponse(response runtime.
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetDomainsDomainRecordsRecordNameBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetDomainsDomainRecordsRecordNameDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -56,6 +70,73 @@ func (o *GetDomainsDomainRecordsRecordNameOK) readResponse(response runtime.Clie
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDomainsDomainRecordsRecordNameBadRequest creates a GetDomainsDomainRecordsRecordNameBadRequest with default headers values
+func NewGetDomainsDomainRecordsRecordNameBadRequest() *GetDomainsDomainRecordsRecordNameBadRequest {
+	return &GetDomainsDomainRecordsRecordNameBadRequest{}
+}
+
+/*GetDomainsDomainRecordsRecordNameBadRequest handles this case with default header values.
+
+Not OK
+*/
+type GetDomainsDomainRecordsRecordNameBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *GetDomainsDomainRecordsRecordNameBadRequest) Error() string {
+	return fmt.Sprintf("[GET /domains/{domain}/records/{record_name}][%d] getDomainsDomainRecordsRecordNameBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetDomainsDomainRecordsRecordNameBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetDomainsDomainRecordsRecordNameDefault creates a GetDomainsDomainRecordsRecordNameDefault with default headers values
+func NewGetDomainsDomainRecordsRecordNameDefault(code int) *GetDomainsDomainRecordsRecordNameDefault {
+	return &GetDomainsDomainRecordsRecordNameDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetDomainsDomainRecordsRecordNameDefault handles this case with default header values.
+
+Unexpected error
+*/
+type GetDomainsDomainRecordsRecordNameDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the get domains domain records record name default response
+func (o *GetDomainsDomainRecordsRecordNameDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetDomainsDomainRecordsRecordNameDefault) Error() string {
+	return fmt.Sprintf("[GET /domains/{domain}/records/{record_name}][%d] GetDomainsDomainRecordsRecordName default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetDomainsDomainRecordsRecordNameDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

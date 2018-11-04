@@ -30,8 +30,22 @@ func (o *PostZonesUUIDDomainsDomainReader) ReadResponse(response runtime.ClientR
 		}
 		return result, nil
 
+	case 400:
+		result := NewPostZonesUUIDDomainsDomainBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewPostZonesUUIDDomainsDomainDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -45,7 +59,7 @@ func NewPostZonesUUIDDomainsDomainOK() *PostZonesUUIDDomainsDomainOK {
 OK
 */
 type PostZonesUUIDDomainsDomainOK struct {
-	Payload *models.ReturnMessage
+	Payload *models.Return200
 }
 
 func (o *PostZonesUUIDDomainsDomainOK) Error() string {
@@ -54,7 +68,74 @@ func (o *PostZonesUUIDDomainsDomainOK) Error() string {
 
 func (o *PostZonesUUIDDomainsDomainOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ReturnMessage)
+	o.Payload = new(models.Return200)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostZonesUUIDDomainsDomainBadRequest creates a PostZonesUUIDDomainsDomainBadRequest with default headers values
+func NewPostZonesUUIDDomainsDomainBadRequest() *PostZonesUUIDDomainsDomainBadRequest {
+	return &PostZonesUUIDDomainsDomainBadRequest{}
+}
+
+/*PostZonesUUIDDomainsDomainBadRequest handles this case with default header values.
+
+Not OK
+*/
+type PostZonesUUIDDomainsDomainBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *PostZonesUUIDDomainsDomainBadRequest) Error() string {
+	return fmt.Sprintf("[POST /zones/{uuid}/domains/{domain}][%d] postZonesUuidDomainsDomainBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *PostZonesUUIDDomainsDomainBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostZonesUUIDDomainsDomainDefault creates a PostZonesUUIDDomainsDomainDefault with default headers values
+func NewPostZonesUUIDDomainsDomainDefault(code int) *PostZonesUUIDDomainsDomainDefault {
+	return &PostZonesUUIDDomainsDomainDefault{
+		_statusCode: code,
+	}
+}
+
+/*PostZonesUUIDDomainsDomainDefault handles this case with default header values.
+
+Unexpected error
+*/
+type PostZonesUUIDDomainsDomainDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the post zones UUID domains domain default response
+func (o *PostZonesUUIDDomainsDomainDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *PostZonesUUIDDomainsDomainDefault) Error() string {
+	return fmt.Sprintf("[POST /zones/{uuid}/domains/{domain}][%d] PostZonesUUIDDomainsDomain default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *PostZonesUUIDDomainsDomainDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

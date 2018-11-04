@@ -30,8 +30,22 @@ func (o *GetZonesUUIDReader) ReadResponse(response runtime.ClientResponse, consu
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetZonesUUIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetZonesUUIDDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -55,6 +69,73 @@ func (o *GetZonesUUIDOK) Error() string {
 func (o *GetZonesUUIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.Zone)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDBadRequest creates a GetZonesUUIDBadRequest with default headers values
+func NewGetZonesUUIDBadRequest() *GetZonesUUIDBadRequest {
+	return &GetZonesUUIDBadRequest{}
+}
+
+/*GetZonesUUIDBadRequest handles this case with default header values.
+
+Not OK
+*/
+type GetZonesUUIDBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *GetZonesUUIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}][%d] getZonesUuidBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetZonesUUIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDDefault creates a GetZonesUUIDDefault with default headers values
+func NewGetZonesUUIDDefault(code int) *GetZonesUUIDDefault {
+	return &GetZonesUUIDDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetZonesUUIDDefault handles this case with default header values.
+
+Unexpected error
+*/
+type GetZonesUUIDDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the get zones UUID default response
+func (o *GetZonesUUIDDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetZonesUUIDDefault) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}][%d] GetZonesUUID default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetZonesUUIDDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

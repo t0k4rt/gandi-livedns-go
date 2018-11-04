@@ -10,21 +10,30 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ReturnMessage return message
-// swagger:model ReturnMessage
-type ReturnMessage struct {
+// Return40x return40x
+// swagger:model Return40x
+type Return40x struct {
+
+	// cause
+	Cause string `json:"cause,omitempty"`
+
+	// code
+	Code int32 `json:"code,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
+
+	// object
+	Object string `json:"object,omitempty"`
 }
 
-// Validate validates this return message
-func (m *ReturnMessage) Validate(formats strfmt.Registry) error {
+// Validate validates this return40x
+func (m *Return40x) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ReturnMessage) MarshalBinary() ([]byte, error) {
+func (m *Return40x) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -32,8 +41,8 @@ func (m *ReturnMessage) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ReturnMessage) UnmarshalBinary(b []byte) error {
-	var res ReturnMessage
+func (m *Return40x) UnmarshalBinary(b []byte) error {
+	var res Return40x
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

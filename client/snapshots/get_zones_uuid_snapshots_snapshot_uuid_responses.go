@@ -33,8 +33,22 @@ func (o *GetZonesUUIDSnapshotsSnapshotUUIDReader) ReadResponse(response runtime.
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetZonesUUIDSnapshotsSnapshotUUIDBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetZonesUUIDSnapshotsSnapshotUUIDDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -58,6 +72,73 @@ func (o *GetZonesUUIDSnapshotsSnapshotUUIDOK) Error() string {
 func (o *GetZonesUUIDSnapshotsSnapshotUUIDOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(GetZonesUUIDSnapshotsSnapshotUUIDOKBody)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDSnapshotsSnapshotUUIDBadRequest creates a GetZonesUUIDSnapshotsSnapshotUUIDBadRequest with default headers values
+func NewGetZonesUUIDSnapshotsSnapshotUUIDBadRequest() *GetZonesUUIDSnapshotsSnapshotUUIDBadRequest {
+	return &GetZonesUUIDSnapshotsSnapshotUUIDBadRequest{}
+}
+
+/*GetZonesUUIDSnapshotsSnapshotUUIDBadRequest handles this case with default header values.
+
+Not OK
+*/
+type GetZonesUUIDSnapshotsSnapshotUUIDBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *GetZonesUUIDSnapshotsSnapshotUUIDBadRequest) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}/snapshots/{snapshot_uuid}][%d] getZonesUuidSnapshotsSnapshotUuidBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetZonesUUIDSnapshotsSnapshotUUIDBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDSnapshotsSnapshotUUIDDefault creates a GetZonesUUIDSnapshotsSnapshotUUIDDefault with default headers values
+func NewGetZonesUUIDSnapshotsSnapshotUUIDDefault(code int) *GetZonesUUIDSnapshotsSnapshotUUIDDefault {
+	return &GetZonesUUIDSnapshotsSnapshotUUIDDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetZonesUUIDSnapshotsSnapshotUUIDDefault handles this case with default header values.
+
+Unexpected error
+*/
+type GetZonesUUIDSnapshotsSnapshotUUIDDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the get zones UUID snapshots snapshot UUID default response
+func (o *GetZonesUUIDSnapshotsSnapshotUUIDDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetZonesUUIDSnapshotsSnapshotUUIDDefault) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}/snapshots/{snapshot_uuid}][%d] GetZonesUUIDSnapshotsSnapshotUUID default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetZonesUUIDSnapshotsSnapshotUUIDDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

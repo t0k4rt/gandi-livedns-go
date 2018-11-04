@@ -30,8 +30,22 @@ func (o *GetZonesReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetZonesBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetZonesDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -56,6 +70,73 @@ func (o *GetZonesOK) readResponse(response runtime.ClientResponse, consumer runt
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesBadRequest creates a GetZonesBadRequest with default headers values
+func NewGetZonesBadRequest() *GetZonesBadRequest {
+	return &GetZonesBadRequest{}
+}
+
+/*GetZonesBadRequest handles this case with default header values.
+
+Not OK
+*/
+type GetZonesBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *GetZonesBadRequest) Error() string {
+	return fmt.Sprintf("[GET /zones][%d] getZonesBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetZonesBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesDefault creates a GetZonesDefault with default headers values
+func NewGetZonesDefault(code int) *GetZonesDefault {
+	return &GetZonesDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetZonesDefault handles this case with default header values.
+
+Unexpected error
+*/
+type GetZonesDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the get zones default response
+func (o *GetZonesDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetZonesDefault) Error() string {
+	return fmt.Sprintf("[GET /zones][%d] GetZones default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetZonesDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

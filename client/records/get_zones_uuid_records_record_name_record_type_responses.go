@@ -30,8 +30,22 @@ func (o *GetZonesUUIDRecordsRecordNameRecordTypeReader) ReadResponse(response ru
 		}
 		return result, nil
 
+	case 400:
+		result := NewGetZonesUUIDRecordsRecordNameRecordTypeBadRequest()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
+
 	default:
-		return nil, runtime.NewAPIError("unknown error", response, response.Code())
+		result := NewGetZonesUUIDRecordsRecordNameRecordTypeDefault(response.Code())
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		if response.Code()/100 == 2 {
+			return result, nil
+		}
+		return nil, result
 	}
 }
 
@@ -56,6 +70,73 @@ func (o *GetZonesUUIDRecordsRecordNameRecordTypeOK) readResponse(response runtim
 
 	// response payload
 	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDRecordsRecordNameRecordTypeBadRequest creates a GetZonesUUIDRecordsRecordNameRecordTypeBadRequest with default headers values
+func NewGetZonesUUIDRecordsRecordNameRecordTypeBadRequest() *GetZonesUUIDRecordsRecordNameRecordTypeBadRequest {
+	return &GetZonesUUIDRecordsRecordNameRecordTypeBadRequest{}
+}
+
+/*GetZonesUUIDRecordsRecordNameRecordTypeBadRequest handles this case with default header values.
+
+Not OK
+*/
+type GetZonesUUIDRecordsRecordNameRecordTypeBadRequest struct {
+	Payload *models.Return400
+}
+
+func (o *GetZonesUUIDRecordsRecordNameRecordTypeBadRequest) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}/records/{record_name}/{record_type}][%d] getZonesUuidRecordsRecordNameRecordTypeBadRequest  %+v", 400, o.Payload)
+}
+
+func (o *GetZonesUUIDRecordsRecordNameRecordTypeBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return400)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGetZonesUUIDRecordsRecordNameRecordTypeDefault creates a GetZonesUUIDRecordsRecordNameRecordTypeDefault with default headers values
+func NewGetZonesUUIDRecordsRecordNameRecordTypeDefault(code int) *GetZonesUUIDRecordsRecordNameRecordTypeDefault {
+	return &GetZonesUUIDRecordsRecordNameRecordTypeDefault{
+		_statusCode: code,
+	}
+}
+
+/*GetZonesUUIDRecordsRecordNameRecordTypeDefault handles this case with default header values.
+
+Unexpected error
+*/
+type GetZonesUUIDRecordsRecordNameRecordTypeDefault struct {
+	_statusCode int
+
+	Payload *models.Return40x
+}
+
+// Code gets the status code for the get zones UUID records record name record type default response
+func (o *GetZonesUUIDRecordsRecordNameRecordTypeDefault) Code() int {
+	return o._statusCode
+}
+
+func (o *GetZonesUUIDRecordsRecordNameRecordTypeDefault) Error() string {
+	return fmt.Sprintf("[GET /zones/{uuid}/records/{record_name}/{record_type}][%d] GetZonesUUIDRecordsRecordNameRecordType default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetZonesUUIDRecordsRecordNameRecordTypeDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.Return40x)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

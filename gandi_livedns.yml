@@ -43,6 +43,16 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Zone'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     post:
       tags:
@@ -68,7 +78,17 @@ paths:
         '201':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /zones/{uuid}:
     get:
@@ -89,6 +109,16 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Zone'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     patch:
       tags:
@@ -120,6 +150,16 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Zone'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     delete:
       tags:
@@ -139,6 +179,16 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Zone'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /zones/{uuid}/domains:
     get:
@@ -164,6 +214,16 @@ paths:
               properties:
                 fqdn:
                   type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
   /zones/{uuid}/domains/{domain}:
@@ -189,7 +249,17 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /zones/{uuid}/records:
     get:
@@ -212,6 +282,16 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
     post:
       tags:
         - Records
@@ -236,7 +316,17 @@ paths:
         '201':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     put:
       tags:
@@ -264,7 +354,17 @@ paths:
         '201':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     delete:
       tags:
@@ -283,7 +383,17 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
   /zones/{uuid}/records/{record_name}:
@@ -312,6 +422,16 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
     delete:
       tags:
         - Records
@@ -334,7 +454,17 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
   /zones/{uuid}/records/{record_name}/{record_type}:
@@ -368,6 +498,16 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
     delete:
       tags:
         - Records
@@ -395,7 +535,17 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
   /zones/{uuid}/snapshots:
@@ -422,6 +572,16 @@ paths:
                 type: string
               uuid:
                 type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     get:
       tags:
@@ -448,6 +608,16 @@ paths:
                   type: string
                 uuid:
                   type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /zones/{uuid}/snapshots/{snapshot_uuid}:
     get:
@@ -484,6 +654,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /domains:
     post:
@@ -519,6 +699,16 @@ paths:
                 type: string
               uuid:
                 type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     get:
       tags:
@@ -537,6 +727,16 @@ paths:
               properties:
                 fqdn:
                   type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
   /domains/{domain}:
     get:
@@ -566,6 +766,16 @@ paths:
                   type: string
                 zone:
                   type: string
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     patch:
       tags:
@@ -598,7 +808,17 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/ReturnMessage'
+              $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
 
@@ -623,6 +843,16 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
     post:
       tags:
@@ -649,7 +879,17 @@ paths:
         '201':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
     put:
@@ -682,7 +922,17 @@ paths:
         '201':
           description: OK
           schema:
-            $ref: '#/definitions/ReturnMessage'
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
 
 
   /domains/{domain}/records/{record_name}:
@@ -711,6 +961,62 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
+            
+  
+    put:
+      tags:
+        - Domains
+      summary: Change all records for a domain
+      description: Optional extended description in Markdown.
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: domain
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: path
+          name: record_name
+          type: string
+          required: true
+          description: Domain to inspect
+        - in: body
+          name: record
+          required: true
+          description: Record to add
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  $ref: '#/definitions/Record'
+      responses:
+        '201':
+          description: OK
+          schema:
+            $ref: '#/definitions/Return200'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
+
 
 
   /domains/{domain}/records/{record_name}/{record_type}:
@@ -741,10 +1047,15 @@ paths:
         '200':
           description: OK
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Record'
-
+            $ref: '#/definitions/Record'
+        '400':
+          description: Not OK
+          schema:
+            $ref: '#/definitions/Return400'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Return40x'
 
 definitions:
   Zone:
@@ -792,11 +1103,41 @@ definitions:
         items:
           type: string
 
-  ReturnMessage:
+  Return200:
     type: object
     properties:
       message:
         type: string
+  
+  ErrorDetails: 
+    type: object
+    properties:
+      location:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+        
+  Return400:
+    type: object
+    properties:
+      status:
+        type: string
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/ErrorDetails'
 
-
-
+  Return40x:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      object:
+        type: string
+      cause:
+        type: string
