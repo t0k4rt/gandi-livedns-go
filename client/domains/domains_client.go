@@ -28,7 +28,7 @@ GetDomains lists domains
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomains(params *GetDomainsParams) (*GetDomainsOK, error) {
+func (a *Client) GetDomains(params *GetDomainsParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDomainsParams()
@@ -43,6 +43,7 @@ func (a *Client) GetDomains(params *GetDomainsParams) (*GetDomainsOK, error) {
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetDomainsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -58,7 +59,7 @@ GetDomainsDomain shows domain details
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomain(params *GetDomainsDomainParams) (*GetDomainsDomainOK, error) {
+func (a *Client) GetDomainsDomain(params *GetDomainsDomainParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDomainsDomainParams()
@@ -73,6 +74,7 @@ func (a *Client) GetDomainsDomain(params *GetDomainsDomainParams) (*GetDomainsDo
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetDomainsDomainReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -88,7 +90,7 @@ GetDomainsDomainRecords lists records for domain
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomainRecords(params *GetDomainsDomainRecordsParams) (*GetDomainsDomainRecordsOK, error) {
+func (a *Client) GetDomainsDomainRecords(params *GetDomainsDomainRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDomainsDomainRecordsParams()
@@ -103,6 +105,7 @@ func (a *Client) GetDomainsDomainRecords(params *GetDomainsDomainRecordsParams) 
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetDomainsDomainRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -118,7 +121,7 @@ GetDomainsDomainRecordsName lists records for domain matching name
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsNameParams) (*GetDomainsDomainRecordsNameOK, error) {
+func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDomainsDomainRecordsNameParams()
@@ -133,6 +136,7 @@ func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsName
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetDomainsDomainRecordsNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -148,7 +152,7 @@ GetDomainsDomainRecordsNameType lists records for domain matching name and type
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecordsNameTypeParams) (*GetDomainsDomainRecordsNameTypeOK, error) {
+func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetDomainsDomainRecordsNameTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetDomainsDomainRecordsNameTypeParams()
@@ -163,6 +167,7 @@ func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecords
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetDomainsDomainRecordsNameTypeReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -178,7 +183,7 @@ PatchDomainsDomain updates domain zone uuid
 
 Optional extended description in Markdown.
 */
-func (a *Client) PatchDomainsDomain(params *PatchDomainsDomainParams) (*PatchDomainsDomainOK, error) {
+func (a *Client) PatchDomainsDomain(params *PatchDomainsDomainParams, authInfo runtime.ClientAuthInfoWriter) (*PatchDomainsDomainOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPatchDomainsDomainParams()
@@ -193,6 +198,7 @@ func (a *Client) PatchDomainsDomain(params *PatchDomainsDomainParams) (*PatchDom
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PatchDomainsDomainReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -208,7 +214,7 @@ PostDomains creates a domain
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostDomains(params *PostDomainsParams) (*PostDomainsCreated, error) {
+func (a *Client) PostDomains(params *PostDomainsParams, authInfo runtime.ClientAuthInfoWriter) (*PostDomainsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDomainsParams()
@@ -223,6 +229,7 @@ func (a *Client) PostDomains(params *PostDomainsParams) (*PostDomainsCreated, er
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDomainsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -238,7 +245,7 @@ PostDomainsDomainRecords adds a record for a domain
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostDomainsDomainRecords(params *PostDomainsDomainRecordsParams) (*PostDomainsDomainRecordsCreated, error) {
+func (a *Client) PostDomainsDomainRecords(params *PostDomainsDomainRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*PostDomainsDomainRecordsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostDomainsDomainRecordsParams()
@@ -253,6 +260,7 @@ func (a *Client) PostDomainsDomainRecords(params *PostDomainsDomainRecordsParams
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostDomainsDomainRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -268,7 +276,7 @@ PutDomainsDomainRecords changes all records for a domain
 
 Optional extended description in Markdown.
 */
-func (a *Client) PutDomainsDomainRecords(params *PutDomainsDomainRecordsParams) (*PutDomainsDomainRecordsCreated, error) {
+func (a *Client) PutDomainsDomainRecords(params *PutDomainsDomainRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*PutDomainsDomainRecordsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPutDomainsDomainRecordsParams()
@@ -283,6 +291,7 @@ func (a *Client) PutDomainsDomainRecords(params *PutDomainsDomainRecordsParams) 
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PutDomainsDomainRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})

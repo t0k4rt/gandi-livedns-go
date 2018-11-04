@@ -28,7 +28,7 @@ DeleteZonesUUID deletes a gandi dns zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUID(params *DeleteZonesUUIDParams) (*DeleteZonesUUIDOK, error) {
+func (a *Client) DeleteZonesUUID(params *DeleteZonesUUIDParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteZonesUUIDParams()
@@ -43,6 +43,7 @@ func (a *Client) DeleteZonesUUID(params *DeleteZonesUUIDParams) (*DeleteZonesUUI
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &DeleteZonesUUIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -58,7 +59,7 @@ GetZones returns a list of gandi dns zones
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZones(params *GetZonesParams) (*GetZonesOK, error) {
+func (a *Client) GetZones(params *GetZonesParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesParams()
@@ -73,6 +74,7 @@ func (a *Client) GetZones(params *GetZonesParams) (*GetZonesOK, error) {
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -88,7 +90,7 @@ GetZonesUUID shows details about gandi dns zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUID(params *GetZonesUUIDParams) (*GetZonesUUIDOK, error) {
+func (a *Client) GetZonesUUID(params *GetZonesUUIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDParams()
@@ -103,6 +105,7 @@ func (a *Client) GetZonesUUID(params *GetZonesUUIDParams) (*GetZonesUUIDOK, erro
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -118,7 +121,7 @@ GetZonesUUIDDomains returns domains for a given DNS zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDDomains(params *GetZonesUUIDDomainsParams) (*GetZonesUUIDDomainsOK, error) {
+func (a *Client) GetZonesUUIDDomains(params *GetZonesUUIDDomainsParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDDomainsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDDomainsParams()
@@ -133,6 +136,7 @@ func (a *Client) GetZonesUUIDDomains(params *GetZonesUUIDDomainsParams) (*GetZon
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDDomainsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -148,7 +152,7 @@ PatchZonesUUID modifies name of gandi dns zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) PatchZonesUUID(params *PatchZonesUUIDParams) (*PatchZonesUUIDOK, error) {
+func (a *Client) PatchZonesUUID(params *PatchZonesUUIDParams, authInfo runtime.ClientAuthInfoWriter) (*PatchZonesUUIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPatchZonesUUIDParams()
@@ -163,6 +167,7 @@ func (a *Client) PatchZonesUUID(params *PatchZonesUUIDParams) (*PatchZonesUUIDOK
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PatchZonesUUIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -178,7 +183,7 @@ PostZones creates a gandi dns zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostZones(params *PostZonesParams) (*PostZonesCreated, error) {
+func (a *Client) PostZones(params *PostZonesParams, authInfo runtime.ClientAuthInfoWriter) (*PostZonesCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostZonesParams()
@@ -193,6 +198,7 @@ func (a *Client) PostZones(params *PostZonesParams) (*PostZonesCreated, error) {
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostZonesReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -208,7 +214,7 @@ PostZonesUUIDDomainsDomain attaches a domain to a zone UUID
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostZonesUUIDDomainsDomain(params *PostZonesUUIDDomainsDomainParams) (*PostZonesUUIDDomainsDomainOK, error) {
+func (a *Client) PostZonesUUIDDomainsDomain(params *PostZonesUUIDDomainsDomainParams, authInfo runtime.ClientAuthInfoWriter) (*PostZonesUUIDDomainsDomainOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostZonesUUIDDomainsDomainParams()
@@ -223,6 +229,7 @@ func (a *Client) PostZonesUUIDDomainsDomain(params *PostZonesUUIDDomainsDomainPa
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostZonesUUIDDomainsDomainReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})

@@ -28,7 +28,7 @@ DeleteZonesUUIDRecords deletes all records in zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUIDRecords(params *DeleteZonesUUIDRecordsParams) (*DeleteZonesUUIDRecordsOK, error) {
+func (a *Client) DeleteZonesUUIDRecords(params *DeleteZonesUUIDRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteZonesUUIDRecordsParams()
@@ -43,6 +43,7 @@ func (a *Client) DeleteZonesUUIDRecords(params *DeleteZonesUUIDRecordsParams) (*
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &DeleteZonesUUIDRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -58,7 +59,7 @@ DeleteZonesUUIDRecordsName deletes all records in zone matching name
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUIDRecordsName(params *DeleteZonesUUIDRecordsNameParams) (*DeleteZonesUUIDRecordsNameOK, error) {
+func (a *Client) DeleteZonesUUIDRecordsName(params *DeleteZonesUUIDRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteZonesUUIDRecordsNameParams()
@@ -73,6 +74,7 @@ func (a *Client) DeleteZonesUUIDRecordsName(params *DeleteZonesUUIDRecordsNamePa
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &DeleteZonesUUIDRecordsNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -88,7 +90,7 @@ DeleteZonesUUIDRecordsNameType deletes all records in zone matching name and typ
 
 Optional extended description in Markdown.
 */
-func (a *Client) DeleteZonesUUIDRecordsNameType(params *DeleteZonesUUIDRecordsNameTypeParams) (*DeleteZonesUUIDRecordsNameTypeOK, error) {
+func (a *Client) DeleteZonesUUIDRecordsNameType(params *DeleteZonesUUIDRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*DeleteZonesUUIDRecordsNameTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteZonesUUIDRecordsNameTypeParams()
@@ -103,6 +105,7 @@ func (a *Client) DeleteZonesUUIDRecordsNameType(params *DeleteZonesUUIDRecordsNa
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &DeleteZonesUUIDRecordsNameTypeReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -118,7 +121,7 @@ GetZonesUUIDRecords returns records in DNS zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDRecords(params *GetZonesUUIDRecordsParams) (*GetZonesUUIDRecordsOK, error) {
+func (a *Client) GetZonesUUIDRecords(params *GetZonesUUIDRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDRecordsParams()
@@ -133,6 +136,7 @@ func (a *Client) GetZonesUUIDRecords(params *GetZonesUUIDRecordsParams) (*GetZon
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -148,7 +152,7 @@ GetZonesUUIDRecordsName gets all records in zone with name
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDRecordsName(params *GetZonesUUIDRecordsNameParams) (*GetZonesUUIDRecordsNameOK, error) {
+func (a *Client) GetZonesUUIDRecordsName(params *GetZonesUUIDRecordsNameParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsNameOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDRecordsNameParams()
@@ -163,6 +167,7 @@ func (a *Client) GetZonesUUIDRecordsName(params *GetZonesUUIDRecordsNameParams) 
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDRecordsNameReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -178,7 +183,7 @@ GetZonesUUIDRecordsNameType gets all records in zone with name and type
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDRecordsNameType(params *GetZonesUUIDRecordsNameTypeParams) (*GetZonesUUIDRecordsNameTypeOK, error) {
+func (a *Client) GetZonesUUIDRecordsNameType(params *GetZonesUUIDRecordsNameTypeParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDRecordsNameTypeOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDRecordsNameTypeParams()
@@ -193,6 +198,7 @@ func (a *Client) GetZonesUUIDRecordsNameType(params *GetZonesUUIDRecordsNameType
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDRecordsNameTypeReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -208,7 +214,7 @@ PostZonesUUIDRecords adds a record to the zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostZonesUUIDRecords(params *PostZonesUUIDRecordsParams) (*PostZonesUUIDRecordsCreated, error) {
+func (a *Client) PostZonesUUIDRecords(params *PostZonesUUIDRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*PostZonesUUIDRecordsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostZonesUUIDRecordsParams()
@@ -223,6 +229,7 @@ func (a *Client) PostZonesUUIDRecords(params *PostZonesUUIDRecordsParams) (*Post
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostZonesUUIDRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -238,7 +245,7 @@ PutZonesUUIDRecords modifies all records in zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) PutZonesUUIDRecords(params *PutZonesUUIDRecordsParams) (*PutZonesUUIDRecordsCreated, error) {
+func (a *Client) PutZonesUUIDRecords(params *PutZonesUUIDRecordsParams, authInfo runtime.ClientAuthInfoWriter) (*PutZonesUUIDRecordsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPutZonesUUIDRecordsParams()
@@ -253,6 +260,7 @@ func (a *Client) PutZonesUUIDRecords(params *PutZonesUUIDRecordsParams) (*PutZon
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PutZonesUUIDRecordsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})

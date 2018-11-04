@@ -28,7 +28,7 @@ GetZonesUUIDSnapshots lists snapshots for a given zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDSnapshots(params *GetZonesUUIDSnapshotsParams) (*GetZonesUUIDSnapshotsOK, error) {
+func (a *Client) GetZonesUUIDSnapshots(params *GetZonesUUIDSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDSnapshotsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDSnapshotsParams()
@@ -43,6 +43,7 @@ func (a *Client) GetZonesUUIDSnapshots(params *GetZonesUUIDSnapshotsParams) (*Ge
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDSnapshotsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -58,7 +59,7 @@ GetZonesUUIDSnapshotsSnapshotUUID creates a snapshot of a zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) GetZonesUUIDSnapshotsSnapshotUUID(params *GetZonesUUIDSnapshotsSnapshotUUIDParams) (*GetZonesUUIDSnapshotsSnapshotUUIDOK, error) {
+func (a *Client) GetZonesUUIDSnapshotsSnapshotUUID(params *GetZonesUUIDSnapshotsSnapshotUUIDParams, authInfo runtime.ClientAuthInfoWriter) (*GetZonesUUIDSnapshotsSnapshotUUIDOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetZonesUUIDSnapshotsSnapshotUUIDParams()
@@ -73,6 +74,7 @@ func (a *Client) GetZonesUUIDSnapshotsSnapshotUUID(params *GetZonesUUIDSnapshots
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &GetZonesUUIDSnapshotsSnapshotUUIDReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})
@@ -88,7 +90,7 @@ PostZonesUUIDSnapshots creates a snapshot of a DNS zone
 
 Optional extended description in Markdown.
 */
-func (a *Client) PostZonesUUIDSnapshots(params *PostZonesUUIDSnapshotsParams) (*PostZonesUUIDSnapshotsCreated, error) {
+func (a *Client) PostZonesUUIDSnapshots(params *PostZonesUUIDSnapshotsParams, authInfo runtime.ClientAuthInfoWriter) (*PostZonesUUIDSnapshotsCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewPostZonesUUIDSnapshotsParams()
@@ -103,6 +105,7 @@ func (a *Client) PostZonesUUIDSnapshots(params *PostZonesUUIDSnapshotsParams) (*
 		Schemes:            []string{"https"},
 		Params:             params,
 		Reader:             &PostZonesUUIDSnapshotsReader{formats: a.formats},
+		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	})

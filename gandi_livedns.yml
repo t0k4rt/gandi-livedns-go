@@ -12,6 +12,8 @@ securityDefinitions:
     type: apiKey
     in: header
     name: X-Api-Key
+security:
+- ApiKeyAuth: []
 
 tags:
   - name: DNS zones
