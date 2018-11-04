@@ -13,11 +13,6 @@ import (
 	"github.com/t0k4rt/gandi-livedns-go/client/domains"
 	"github.com/t0k4rt/gandi-livedns-go/client/operations"
 	"github.com/t0k4rt/gandi-livedns-go/client/records"
-
-	"github.com/t0k4rt/gandi-livedns-go/client/domains"
-	"github.com/t0k4rt/gandi-livedns-go/client/operations"
-
-	"github.com/t0k4rt/gandi-livedns-go/client/records"
 )
 
 // Default gandi live DNS HTTP client.
