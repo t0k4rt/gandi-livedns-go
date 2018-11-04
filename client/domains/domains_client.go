@@ -84,6 +84,96 @@ func (a *Client) GetDomainsDomain(params *GetDomainsDomainParams) (*GetDomainsDo
 }
 
 /*
+GetDomainsDomainRecords lists records for domain
+
+Optional extended description in Markdown.
+*/
+func (a *Client) GetDomainsDomainRecords(params *GetDomainsDomainRecordsParams) (*GetDomainsDomainRecordsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDomainsDomainRecordsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetDomainsDomainRecords",
+		Method:             "GET",
+		PathPattern:        "/domains/{domain}/records",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetDomainsDomainRecordsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetDomainsDomainRecordsOK), nil
+
+}
+
+/*
+GetDomainsDomainRecordsName lists records for domain matching name
+
+Optional extended description in Markdown.
+*/
+func (a *Client) GetDomainsDomainRecordsName(params *GetDomainsDomainRecordsNameParams) (*GetDomainsDomainRecordsNameOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDomainsDomainRecordsNameParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetDomainsDomainRecordsName",
+		Method:             "GET",
+		PathPattern:        "/domains/{domain}/records/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetDomainsDomainRecordsNameReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetDomainsDomainRecordsNameOK), nil
+
+}
+
+/*
+GetDomainsDomainRecordsNameType lists records for domain matching name and type
+
+Optional extended description in Markdown.
+*/
+func (a *Client) GetDomainsDomainRecordsNameType(params *GetDomainsDomainRecordsNameTypeParams) (*GetDomainsDomainRecordsNameTypeOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetDomainsDomainRecordsNameTypeParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetDomainsDomainRecordsNameType",
+		Method:             "GET",
+		PathPattern:        "/domains/{domain}/records/{name}/{type}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetDomainsDomainRecordsNameTypeReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetDomainsDomainRecordsNameTypeOK), nil
+
+}
+
+/*
 PatchDomainsDomain updates domain zone uuid
 
 Optional extended description in Markdown.
@@ -140,6 +230,66 @@ func (a *Client) PostDomains(params *PostDomainsParams) (*PostDomainsCreated, er
 		return nil, err
 	}
 	return result.(*PostDomainsCreated), nil
+
+}
+
+/*
+PostDomainsDomainRecords adds a record for a domain
+
+Optional extended description in Markdown.
+*/
+func (a *Client) PostDomainsDomainRecords(params *PostDomainsDomainRecordsParams) (*PostDomainsDomainRecordsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostDomainsDomainRecordsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostDomainsDomainRecords",
+		Method:             "POST",
+		PathPattern:        "/domains/{domain}/records",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PostDomainsDomainRecordsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostDomainsDomainRecordsCreated), nil
+
+}
+
+/*
+PutDomainsDomainRecords changes all records for a domain
+
+Optional extended description in Markdown.
+*/
+func (a *Client) PutDomainsDomainRecords(params *PutDomainsDomainRecordsParams) (*PutDomainsDomainRecordsCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPutDomainsDomainRecordsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PutDomainsDomainRecords",
+		Method:             "PUT",
+		PathPattern:        "/domains/{domain}/records",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PutDomainsDomainRecordsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PutDomainsDomainRecordsCreated), nil
 
 }
 

@@ -114,6 +114,36 @@ func (a *Client) GetZonesUUID(params *GetZonesUUIDParams) (*GetZonesUUIDOK, erro
 }
 
 /*
+GetZonesUUIDDomains returns domains for a given DNS zone
+
+Optional extended description in Markdown.
+*/
+func (a *Client) GetZonesUUIDDomains(params *GetZonesUUIDDomainsParams) (*GetZonesUUIDDomainsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetZonesUUIDDomainsParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "GetZonesUUIDDomains",
+		Method:             "GET",
+		PathPattern:        "/zones/{uuid}/domains",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetZonesUUIDDomainsReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*GetZonesUUIDDomainsOK), nil
+
+}
+
+/*
 PatchZonesUUID modifies name of gandi dns zone
 
 Optional extended description in Markdown.
@@ -170,6 +200,36 @@ func (a *Client) PostZones(params *PostZonesParams) (*PostZonesCreated, error) {
 		return nil, err
 	}
 	return result.(*PostZonesCreated), nil
+
+}
+
+/*
+PostZonesUUIDDomainsDomain attaches a domain to a zone UUID
+
+Optional extended description in Markdown.
+*/
+func (a *Client) PostZonesUUIDDomainsDomain(params *PostZonesUUIDDomainsDomainParams) (*PostZonesUUIDDomainsDomainOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPostZonesUUIDDomainsDomainParams()
+	}
+
+	result, err := a.transport.Submit(&runtime.ClientOperation{
+		ID:                 "PostZonesUUIDDomainsDomain",
+		Method:             "POST",
+		PathPattern:        "/zones/{uuid}/domains/{domain}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{""},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PostZonesUUIDDomainsDomainReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return result.(*PostZonesUUIDDomainsDomainOK), nil
 
 }
 

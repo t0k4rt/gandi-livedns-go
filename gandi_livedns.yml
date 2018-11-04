@@ -142,7 +142,6 @@ paths:
     get:
       tags:
         - DNS zones
-        - Domains
       summary: Returns domains for a given DNS zone
       description: Optional extended description in Markdown.
       produces:
@@ -169,7 +168,6 @@ paths:
     post:
       tags:
         - DNS zones
-        - Domains
       summary: Attach a domain to a zone UUID
       description: Optional extended description in Markdown.
       produces:
@@ -401,7 +399,6 @@ paths:
   /zones/{uuid}/snapshots:
     post:
       tags:
-        - DNS zones
         - Snapshots
       summary: Create a snapshot of a DNS zone
       description: Optional extended description in Markdown.
@@ -426,7 +423,6 @@ paths:
 
     get:
       tags:
-        - DNS zones
         - Snapshots
       summary: List snapshots for a given zone
       description: Optional extended description in Markdown.
@@ -454,7 +450,6 @@ paths:
   /zones/{uuid}/snapshots/{snapshot_uuid}:
     get:
       tags:
-        - DNS zones
         - Snapshots
       summary: Create a snapshot of a zone
       description: Optional extended description in Markdown.
@@ -609,7 +604,6 @@ paths:
     get:
       tags:
         - Domains
-        - Records
       summary: List records for domain
       description: Optional extended description in Markdown.
       produces:
@@ -631,7 +625,6 @@ paths:
     post:
       tags:
         - Domains
-        - Records
       summary: Adds a record for a domain
       description: Optional extended description in Markdown.
       consumes:
@@ -660,7 +653,6 @@ paths:
     put:
       tags:
         - Domains
-        - Records
       summary: Change all records for a domain
       description: Optional extended description in Markdown.
       consumes:
@@ -685,7 +677,7 @@ paths:
                 items:
                   $ref: '#/definitions/Record'
       responses:
-        '200':
+        '201':
           description: OK
           schema:
             $ref: '#/definitions/ReturnMessage'
@@ -695,7 +687,6 @@ paths:
     get:
       tags:
         - Domains
-        - Records
       summary: List records for domain matching name
       description: Optional extended description in Markdown.
       produces:
@@ -724,7 +715,6 @@ paths:
     get:
       tags:
         - Domains
-        - Records
       summary: List records for domain matching name and type
       description: Optional extended description in Markdown.
       produces:

@@ -11,8 +11,8 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/t0k4rt/gandi-livedns-go/client/dns_zones"
 	"github.com/t0k4rt/gandi-livedns-go/client/domains"
-	"github.com/t0k4rt/gandi-livedns-go/client/operations"
 	"github.com/t0k4rt/gandi-livedns-go/client/records"
+	"github.com/t0k4rt/gandi-livedns-go/client/snapshots"
 )
 
 // Default gandi live DNS HTTP client.
@@ -62,9 +62,9 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *GandiLiveD
 
 	cli.Domains = domains.New(transport, formats)
 
-	cli.Operations = operations.New(transport, formats)
-
 	cli.Records = records.New(transport, formats)
+
+	cli.Snapshots = snapshots.New(transport, formats)
 
 	return cli
 }
@@ -114,9 +114,9 @@ type GandiLiveDNS struct {
 
 	Domains *domains.Client
 
-	Operations *operations.Client
-
 	Records *records.Client
+
+	Snapshots *snapshots.Client
 
 	Transport runtime.ClientTransport
 }
@@ -129,8 +129,8 @@ func (c *GandiLiveDNS) SetTransport(transport runtime.ClientTransport) {
 
 	c.Domains.SetTransport(transport)
 
-	c.Operations.SetTransport(transport)
-
 	c.Records.SetTransport(transport)
+
+	c.Snapshots.SetTransport(transport)
 
 }
