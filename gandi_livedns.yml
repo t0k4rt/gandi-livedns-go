@@ -779,7 +779,7 @@ definitions:
   Record:
     type: object
     properties:
-      name:
+      rrset_name:
         type: string
       rrset_type:
         type: string

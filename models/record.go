@@ -18,8 +18,8 @@ import (
 // swagger:model Record
 type Record struct {
 
-	// name
-	Name string `json:"name,omitempty"`
+	// rrset name
+	RrsetName string `json:"rrset_name,omitempty"`
 
 	// rrset ttl
 	RrsetTTL int32 `json:"rrset_ttl,omitempty"`
