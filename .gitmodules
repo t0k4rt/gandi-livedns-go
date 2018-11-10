@@ -1,0 +1,3 @@
+[submodule "gandi-livedns-openapi"]
+	path = gandi-livedns-openapi
+	url = git@github.com:t0k4rt/gandi-livedns-openapi.git
