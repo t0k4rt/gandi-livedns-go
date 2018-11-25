@@ -8,12 +8,9 @@ package domains
 import (
 	"fmt"
 	"io"
-	"strconv"
 
-	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	strfmt "github.com/go-openapi/strfmt"
-	"github.com/go-openapi/swag"
 	models "github.com/t0k4rt/gandi-livedns-go/models"
 )
 
@@ -145,71 +142,5 @@ func (o *PutDomainsDomainRecordsRecordNameRecordTypeDefault) readResponse(respon
 		return err
 	}
 
-	return nil
-}
-
-/*PutDomainsDomainRecordsRecordNameRecordTypeBody put domains domain records record name record type body
-swagger:model PutDomainsDomainRecordsRecordNameRecordTypeBody
-*/
-type PutDomainsDomainRecordsRecordNameRecordTypeBody struct {
-
-	// items
-	Items []*models.Record `json:"items"`
-}
-
-// Validate validates this put domains domain records record name record type body
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeBody) Validate(formats strfmt.Registry) error {
-	var res []error
-
-	if err := o.validateItems(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if len(res) > 0 {
-		return errors.CompositeValidationError(res...)
-	}
-	return nil
-}
-
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeBody) validateItems(formats strfmt.Registry) error {
-
-	if swag.IsZero(o.Items) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(o.Items); i++ {
-		if swag.IsZero(o.Items[i]) { // not required
-			continue
-		}
-
-		if o.Items[i] != nil {
-			if err := o.Items[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("record" + "." + "items" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
-	return nil
-}
-
-// MarshalBinary interface implementation
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeBody) MarshalBinary() ([]byte, error) {
-	if o == nil {
-		return nil, nil
-	}
-	return swag.WriteJSON(o)
-}
-
-// UnmarshalBinary interface implementation
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeBody) UnmarshalBinary(b []byte) error {
-	var res PutDomainsDomainRecordsRecordNameRecordTypeBody
-	if err := swag.ReadJSON(b, &res); err != nil {
-		return err
-	}
-	*o = res
 	return nil
 }

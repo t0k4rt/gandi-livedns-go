@@ -13,6 +13,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	strfmt "github.com/go-openapi/strfmt"
+	models "github.com/t0k4rt/gandi-livedns-go/models"
 	"golang.org/x/net/context"
 )
 
@@ -69,7 +70,7 @@ type PutDomainsDomainRecordsRecordNameRecordTypeParams struct {
 	  Record to add
 
 	*/
-	Record PutDomainsDomainRecordsRecordNameRecordTypeBody
+	Record *models.Record
 	/*RecordName
 	  Domain to inspect
 
@@ -131,13 +132,13 @@ func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) SetDomain(domain str
 }
 
 // WithRecord adds the record to the put domains domain records record name record type params
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) WithRecord(record PutDomainsDomainRecordsRecordNameRecordTypeBody) *PutDomainsDomainRecordsRecordNameRecordTypeParams {
+func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) WithRecord(record *models.Record) *PutDomainsDomainRecordsRecordNameRecordTypeParams {
 	o.SetRecord(record)
 	return o
 }
 
 // SetRecord adds the record to the put domains domain records record name record type params
-func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) SetRecord(record PutDomainsDomainRecordsRecordNameRecordTypeBody) {
+func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) SetRecord(record *models.Record) {
 	o.Record = record
 }
 
@@ -176,8 +177,10 @@ func (o *PutDomainsDomainRecordsRecordNameRecordTypeParams) WriteToRequest(r run
 		return err
 	}
 
-	if err := r.SetBodyParam(o.Record); err != nil {
-		return err
+	if o.Record != nil {
+		if err := r.SetBodyParam(o.Record); err != nil {
+			return err
+		}
 	}
 
 	// path param record_name

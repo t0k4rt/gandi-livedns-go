@@ -334,7 +334,7 @@ func (a *Client) PutDomainsDomainRecordsRecordName(params *PutDomainsDomainRecor
 }
 
 /*
-PutDomainsDomainRecordsRecordNameRecordType changes all records for a domain
+PutDomainsDomainRecordsRecordNameRecordType changes all records for a domain a record name and a record type
 
 Optional extended description in Markdown.
 */
